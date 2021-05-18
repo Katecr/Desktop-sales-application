@@ -5,11 +5,14 @@ public class Data {
     private int userCounter=0;
     
     public Data(){
-       User myUser = new User("97072008310", "Kate", "Castaño Rueda", "123456", 1);
+       User myUser = new User("kate", "Kate", "Castaño Rueda", "123456", 1);
        myUsers[userCounter] = myUser;
        userCounter++;
     }
     
+    public User[] getUsers() {
+        return myUsers;
+    }
     public boolean validateUser(String user, String password){
        boolean aux = false;
         for (int i = 0; i < userCounter; i++) {

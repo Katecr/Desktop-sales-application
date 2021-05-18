@@ -1,10 +1,15 @@
 package Forms;
 
+import classes.Data;
+
 public class frmPrimary extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmPrimary
-     */
+    private Data myData;
+    
+    public void setDatos(Data myData){
+        this.myData = myData;
+    }
+    
     public frmPrimary() {
         initComponents();
     }
@@ -160,6 +165,7 @@ public class frmPrimary extends javax.swing.JFrame {
 
     private void mnuFileUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFileUsersActionPerformed
         frmUsers myUsers = new frmUsers();
+        myUsers.setDatos(myData);
         dpnDestok.add(myUsers);
         myUsers.show();
     }//GEN-LAST:event_mnuFileUsersActionPerformed

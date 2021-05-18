@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Forms;
 
 import classes.Data;
@@ -14,10 +10,13 @@ import javax.swing.JOptionPane;
  * @author diseno1
  */
 public class frmLogin extends javax.swing.JFrame {
-
-    /**
-     * Creates new form frmLogin
-     */
+    
+    private Data myData;
+    
+    public void setDatos(Data myData){
+        this.myData = myData;
+    }
+    
     public frmLogin() {
         initComponents();
     }
@@ -139,7 +138,7 @@ public class frmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUserActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-        Data myData = new Data();
+        
         if(!myData.validateUser(txtUser.getText(),new String(txtPassword.getPassword()))){
             JOptionPane.showMessageDialog(rootPane, "Usuario o clave incorrecto");
             txtUser.setText("");
@@ -150,6 +149,7 @@ public class frmLogin extends javax.swing.JFrame {
         
         frmPrimary myPrimary = new frmPrimary();
         this.setVisible(false);
+        myPrimary.setDatos(myData);
         myPrimary.setExtendedState(JFrame.MAXIMIZED_BOTH);
         myPrimary.setVisible(true);
     }//GEN-LAST:event_btnAcceptActionPerformed

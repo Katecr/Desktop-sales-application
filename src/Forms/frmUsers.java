@@ -1,19 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Forms;
 
-/**
- *
- * @author diseno1
- */
+package Forms;
+import classes.Data;
+
 public class frmUsers extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form frmUsers
-     */
+    private Data myData;
+    private int userCurrent = 0;
+    
+    public void setDatos(Data myData){
+        this.myData = myData;
+    }
+    
     public frmUsers() {
         initComponents();
     }
@@ -55,6 +52,23 @@ public class frmUsers extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
         setTitle("Usuarios");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jLabel1.setText("ID Usuario:");
 
@@ -383,6 +397,16 @@ public class frmUsers extends javax.swing.JInternalFrame {
        txtConfirm.setEnabled(false);
        cmbProfile.setEnabled(false);
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+       txtIdUser.setText(myData.getUsers()[userCurrent].getIdUser());
+       txtName.setText(myData.getUsers()[userCurrent].getName());
+       txtLastName.setText(myData.getUsers()[userCurrent].getLastName());
+       txtPassword.setText(myData.getUsers()[userCurrent].getPassword());
+       txtConfirm.setText(myData.getUsers()[userCurrent].getPassword());
+       cmbProfile.setSelectedIndex(myData.getUsers()[userCurrent].getProfile());
+       
+    }//GEN-LAST:event_formInternalFrameOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
