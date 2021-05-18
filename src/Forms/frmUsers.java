@@ -304,7 +304,27 @@ public class frmUsers extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
+        //Enable buttons
+       btnFirst.setEnabled(false);
+       btnLast.setEnabled(false);
+       btnNext.setEnabled(false);
+       btnLatest.setEnabled(false);
+       btnEdit.setEnabled(false);
+       btnDeleteUser.setEnabled(false);
+       btnSearch.setEnabled(false);
+       btnSave.setEnabled(true);
+       btnCancel.setEnabled(true);
+       
+       //Enable Fields
+       txtIdUser.setEnabled(false);
+       txtName.setEnabled(true);
+       txtLastName.setEnabled(true);
+       txtPassword.setEnabled(true);
+       txtConfirm.setEnabled(true);
+       cmbProfile.setEnabled(true);
+              
+       //focus to ID field
+       txtName.requestFocusInWindow();
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
