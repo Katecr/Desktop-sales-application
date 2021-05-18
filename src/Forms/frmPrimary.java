@@ -1,4 +1,4 @@
-package formularios;
+package Forms;
 
 public class frmPrimary extends javax.swing.JFrame {
 

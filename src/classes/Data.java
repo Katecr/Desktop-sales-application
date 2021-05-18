@@ -1,4 +1,4 @@
-package clases;
+package classes;
 
 public class Data {
     public boolean validateUser(String user, String password){

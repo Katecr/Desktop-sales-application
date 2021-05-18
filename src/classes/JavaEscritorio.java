@@ -1,7 +1,7 @@
 
-package clases;
+package classes;
 
-import formularios.frmLogin;
+import Forms.frmLogin;
 
 public class JavaEscritorio {
 
