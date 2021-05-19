@@ -3,12 +3,14 @@ package classes;
 public class Data {
 
     private int maxUser = 50;
+    private int maxProducts = 100;
     private User myUsers[] = new User[maxUser];
+    private Product myProducts[] = new Product[maxProducts];
     private int userCounter = 0;
+    private int productCounter = 0;
 
     public Data() {
-        User myUser;
-
+        User myUser;        
         myUser = new User("kate", "Kate", "Castaño Rueda", "123456", 1);
         myUsers[userCounter] = myUser;
         userCounter++;
@@ -19,8 +21,22 @@ public class Data {
         myUsers[userCounter] = myUser;
         userCounter++;
         myUser = new User("lucho", "Luis", "Perez", "123", 2);
+        
+        
+        Product myProduct;
+        
+        myProduct = new Product("1", "Coca-Cola",1200, 0, "");
+        myProducts[productCounter] = myProduct;
+        productCounter++;
+        myProduct = new Product("2", "Pan de leche",800, 1, "se venden mejor caliente");
+        myProducts[productCounter] = myProduct;
+        productCounter++;
+        myProduct = new Product("3", "Salchichon Zanu x 500gr",3500, 2, "Recomendado con pan");
+        myProducts[productCounter] = myProduct;
+        productCounter++;
+        
     }
-
+    //user methods
     public User[] getUsers() {
         return myUsers;
     }
@@ -73,4 +89,15 @@ public class Data {
         userCounter--;
         return "Usuario elimiando correctamente";
     }
+    
+    //products methods
+    public Product[] getProducts() {
+        return myProducts;
+    }
+
+    public int numberProducts() {
+        return productCounter;
+    }
+
+  
 }

@@ -66,6 +66,11 @@ public class frmPrimary extends javax.swing.JFrame {
 
         mnuFileProducts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/products.png"))); // NOI18N
         mnuFileProducts.setText("Productos");
+        mnuFileProducts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuFileProductsActionPerformed(evt);
+            }
+        });
         mnuFile.add(mnuFileProducts);
 
         mnuFileUsers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/users.png"))); // NOI18N
@@ -173,6 +178,13 @@ public class frmPrimary extends javax.swing.JFrame {
     private void mnuFileExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFileExitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_mnuFileExitActionPerformed
+
+    private void mnuFileProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFileProductsActionPerformed
+        frmProducts myProducts = new frmProducts();
+        myProducts.setDatos(myData);
+        dpnDestok.add(myProducts);
+        myProducts.show();
+    }//GEN-LAST:event_mnuFileProductsActionPerformed
 
     /**
      * @param args the command line arguments
