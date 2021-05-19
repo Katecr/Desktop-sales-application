@@ -44,4 +44,8 @@ public class Data {
         return "Usuario agregado correctamente";
     }
     
+    public int numberUsers(){
+        return userCounter;
+    }
+    
 }

@@ -341,19 +341,29 @@ public class frmUsers extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void btnLatestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLatestActionPerformed
-        // TODO add your handling code here:
+        userCurrent= myData.numberUsers()-1;
+        showRegister();
     }//GEN-LAST:event_btnLatestActionPerformed
 
     private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFirstActionPerformed
-        // TODO add your handling code here:
+        userCurrent = 0;
+        showRegister();
     }//GEN-LAST:event_btnFirstActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        // TODO add your handling code here:
+        userCurrent++;
+        if(userCurrent == myData.numberUsers()){
+            userCurrent=0;
+        }
+        showRegister();
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
-        // TODO add your handling code here:
+        userCurrent--;
+        if(userCurrent == -1){
+            userCurrent=myData.numberUsers()-1;
+        }
+        showRegister();
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -422,12 +432,10 @@ public class frmUsers extends javax.swing.JInternalFrame {
             return; 
         }
         
+        //We create the user object and add it to data
         User myUser = new User(txtIdUser.getText(),txtName.getText(),txtLastName.getText(),password,cmbProfile.getSelectedIndex());
         String msg = myData.addUser(myUser);
-        JOptionPane.showInternalMessageDialog(rootPane, msg);
-        
-        //We create the user object and add it to data
-
+        JOptionPane.showMessageDialog(rootPane, msg);
 
        //Enable Buttons
        btnFirst.setEnabled(true);
@@ -537,15 +545,17 @@ public class frmUsers extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+       showRegister();
+    }//GEN-LAST:event_formInternalFrameOpened
+    
+    private void showRegister(){
        txtIdUser.setText(myData.getUsers()[userCurrent].getIdUser());
        txtName.setText(myData.getUsers()[userCurrent].getName());
        txtLastName.setText(myData.getUsers()[userCurrent].getLastName());
        txtPassword.setText(myData.getUsers()[userCurrent].getPassword());
        txtConfirm.setText(myData.getUsers()[userCurrent].getPassword());
        cmbProfile.setSelectedIndex(myData.getUsers()[userCurrent].getProfile());
-       
-    }//GEN-LAST:event_formInternalFrameOpened
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
