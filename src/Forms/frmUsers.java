@@ -1,5 +1,5 @@
-
 package Forms;
+
 import classes.Data;
 import classes.User;
 import javax.swing.JOptionPane;
@@ -9,11 +9,11 @@ public class frmUsers extends javax.swing.JInternalFrame {
     private Data myData;
     private int userCurrent = 0;
     private boolean newAdd = false;
-    
-    public void setDatos(Data myData){
+
+    public void setDatos(Data myData) {
         this.myData = myData;
     }
-    
+
     public frmUsers() {
         initComponents();
     }
@@ -82,8 +82,11 @@ public class frmUsers extends javax.swing.JInternalFrame {
 
         jLabel1.setText("ID Usuario:");
 
+        txtIdUser.setEnabled(false);
+
         jLabel2.setText("Nombres:");
 
+        txtName.setEnabled(false);
         txtName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNameActionPerformed(evt);
@@ -92,9 +95,15 @@ public class frmUsers extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Apellidos:");
 
+        txtLastName.setEnabled(false);
+
+        txtPassword.setEnabled(false);
+
         jLabel4.setText("Clave:");
 
         jLabel5.setText("Confirmación:");
+
+        txtConfirm.setEnabled(false);
 
         jLabel6.setText("Perfil:");
 
@@ -341,7 +350,7 @@ public class frmUsers extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void btnLatestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLatestActionPerformed
-        userCurrent= myData.numberUsers()-1;
+        userCurrent = myData.numberUsers() - 1;
         showRegister();
     }//GEN-LAST:event_btnLatestActionPerformed
 
@@ -352,16 +361,16 @@ public class frmUsers extends javax.swing.JInternalFrame {
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         userCurrent++;
-        if(userCurrent == myData.numberUsers()){
-            userCurrent=0;
+        if (userCurrent == myData.numberUsers()) {
+            userCurrent = 0;
         }
         showRegister();
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         userCurrent--;
-        if(userCurrent == -1){
-            userCurrent=myData.numberUsers()-1;
+        if (userCurrent == -1) {
+            userCurrent = myData.numberUsers() - 1;
         }
         showRegister();
     }//GEN-LAST:event_btnLastActionPerformed
@@ -371,190 +380,209 @@ public class frmUsers extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-       
+
         //Validate Data
-        if(txtIdUser.getText().equals("")){
-            JOptionPane.showInternalMessageDialog(rootPane,"Debe digitar un ID");
+        if (txtIdUser.getText().equals("")) {
+            JOptionPane.showInternalMessageDialog(rootPane, "Debe digitar un ID");
             txtIdUser.requestFocusInWindow();
             return;
         }
-        
-        if(cmbProfile.getSelectedIndex() == 0){
-            JOptionPane.showInternalMessageDialog(rootPane,"Debe seleccionar un perfil");
+
+        if (cmbProfile.getSelectedIndex() == 0) {
+            JOptionPane.showInternalMessageDialog(rootPane, "Debe seleccionar un perfil");
             cmbProfile.requestFocusInWindow();
             return;
         }
-        
-        if(txtName.getText().equals("")){
-            JOptionPane.showInternalMessageDialog(rootPane,"Debe digitar un nombre");
+
+        if (txtName.getText().equals("")) {
+            JOptionPane.showInternalMessageDialog(rootPane, "Debe digitar un nombre");
             txtName.requestFocusInWindow();
             return;
         }
-        
-        if(txtLastName.getText().equals("")){
-            JOptionPane.showInternalMessageDialog(rootPane,"Debe digitar un apellido");
+
+        if (txtLastName.getText().equals("")) {
+            JOptionPane.showInternalMessageDialog(rootPane, "Debe digitar un apellido");
             txtLastName.requestFocusInWindow();
             return;
         }
-        
+
         String password = new String(txtPassword.getPassword());
         String confirm = new String(txtConfirm.getPassword());
-        
-        if(password.equals("")){
-            JOptionPane.showInternalMessageDialog(rootPane,"Debe digitar una contraseña");
+
+        if (password.equals("")) {
+            JOptionPane.showInternalMessageDialog(rootPane, "Debe digitar una contraseña");
             txtPassword.requestFocusInWindow();
             return;
         }
-        if(confirm.equals("")){
-            JOptionPane.showInternalMessageDialog(rootPane,"Debe digitar una confirmación");
+        if (confirm.equals("")) {
+            JOptionPane.showInternalMessageDialog(rootPane, "Debe digitar una confirmación");
             txtConfirm.requestFocusInWindow();
             return;
         }
-        
-        if(!password.equals(confirm)){
-            JOptionPane.showInternalMessageDialog(rootPane,"La contraseña y la confirmación no son iguales");
+
+        if (!password.equals(confirm)) {
+            JOptionPane.showInternalMessageDialog(rootPane, "La contraseña y la confirmación no son iguales");
+            txtConfirm.setText("");
+            txtPassword.setText("");
             txtPassword.requestFocusInWindow();
             return;
         }
-        
+
         //If it is new, we validate that the user does not exist
         int position = myData.userPosition(txtIdUser.getText());
-        
-        if(newAdd){
-           if(position != -1){
-              JOptionPane.showInternalMessageDialog(rootPane,"Usuario ya existe");
-              txtIdUser.requestFocusInWindow();
-              return; 
-           }
-        }else{
-           JOptionPane.showInternalMessageDialog(rootPane,"Usuario creado");
-            txtIdUser.requestFocusInWindow();
-            return; 
+
+        if (newAdd) {
+            if (position != -1) {
+                JOptionPane.showInternalMessageDialog(rootPane, "Usuario ya existe");
+                txtIdUser.requestFocusInWindow();
+                return;
+            }
+        } else {
+            if (position == -1) {
+                JOptionPane.showInternalMessageDialog(rootPane, "Usuario creado");
+                txtIdUser.requestFocusInWindow();
+                return;
+            }
         }
-        
+
         //We create the user object and add it to data
-        User myUser = new User(txtIdUser.getText(),txtName.getText(),txtLastName.getText(),password,cmbProfile.getSelectedIndex());
-        String msg = myData.addUser(myUser);
+        User myUser = new User(txtIdUser.getText(), txtName.getText(), txtLastName.getText(), password, cmbProfile.getSelectedIndex());
+        String msg;
+        if (newAdd) {
+            msg = myData.addUser(myUser);
+        } else {
+            msg = myData.editUser(myUser, position);
+        }
+
         JOptionPane.showMessageDialog(rootPane, msg);
 
-       //Enable Buttons
-       btnFirst.setEnabled(true);
-       btnLast.setEnabled(true);
-       btnNext.setEnabled(true);
-       btnLatest.setEnabled(true);
-       btnEdit.setEnabled(true);
-       btnDeleteUser.setEnabled(true);
-       btnSearch.setEnabled(true);
-       btnSave.setEnabled(false);
-       btnCancel.setEnabled(false);
-       
-       //Disable Fields
-       txtIdUser.setEnabled(false);
-       txtName.setEnabled(false);
-       txtLastName.setEnabled(false);
-       txtPassword.setEnabled(false);
-       txtConfirm.setEnabled(false);
-       cmbProfile.setEnabled(false);
+        //Enable Buttons
+        btnFirst.setEnabled(true);
+        btnLast.setEnabled(true);
+        btnNext.setEnabled(true);
+        btnLatest.setEnabled(true);
+        btnEdit.setEnabled(true);
+        btnDeleteUser.setEnabled(true);
+        btnSearch.setEnabled(true);
+        btnSave.setEnabled(false);
+        btnCancel.setEnabled(false);
+
+        //Disable Fields
+        txtIdUser.setEnabled(false);
+        txtName.setEnabled(false);
+        txtLastName.setEnabled(false);
+        txtPassword.setEnabled(false);
+        txtConfirm.setEnabled(false);
+        cmbProfile.setEnabled(false);
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         //Enable buttons
-       btnFirst.setEnabled(false);
-       btnLast.setEnabled(false);
-       btnNext.setEnabled(false);
-       btnLatest.setEnabled(false);
-       btnEdit.setEnabled(false);
-       btnDeleteUser.setEnabled(false);
-       btnSearch.setEnabled(false);
-       btnSave.setEnabled(true);
-       btnCancel.setEnabled(true);
-       
-       //Enable Fields
-       txtIdUser.setEnabled(false);
-       txtName.setEnabled(true);
-       txtLastName.setEnabled(true);
-       txtPassword.setEnabled(true);
-       txtConfirm.setEnabled(true);
-       cmbProfile.setEnabled(true);
-       
-       //We activate the new register flag
-       newAdd = false;
-              
-       //focus to ID field
-       txtName.requestFocusInWindow();
+        btnFirst.setEnabled(false);
+        btnLast.setEnabled(false);
+        btnNext.setEnabled(false);
+        btnLatest.setEnabled(false);
+        btnEdit.setEnabled(false);
+        btnDeleteUser.setEnabled(false);
+        btnSearch.setEnabled(false);
+        btnSave.setEnabled(true);
+        btnCancel.setEnabled(true);
+
+        //Enable Fields
+        txtIdUser.setEnabled(false);
+        txtName.setEnabled(true);
+        txtLastName.setEnabled(true);
+        txtPassword.setEnabled(true);
+        txtConfirm.setEnabled(true);
+        cmbProfile.setEnabled(true);
+
+        //We activate the new register flag
+        newAdd = false;
+
+        //focus to ID field
+        txtName.requestFocusInWindow();
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-       //Enable buttons
-       btnFirst.setEnabled(false);
-       btnLast.setEnabled(false);
-       btnNext.setEnabled(false);
-       btnLatest.setEnabled(false);
-       btnEdit.setEnabled(false);
-       btnDeleteUser.setEnabled(false);
-       btnSearch.setEnabled(false);
-       btnSave.setEnabled(true);
-       btnCancel.setEnabled(true);
-       
-       //Enable Fields
-       txtIdUser.setEnabled(true);
-       txtName.setEnabled(true);
-       txtLastName.setEnabled(true);
-       txtPassword.setEnabled(true);
-       txtConfirm.setEnabled(true);
-       cmbProfile.setEnabled(true);
-       
-       //Clear Fields
-       txtIdUser.setText("");
-       txtName.setText("");
-       txtLastName.setText("");
-       txtPassword.setText("");
-       txtConfirm.setText("");
-       cmbProfile.setSelectedIndex(0);
-       
-       //We activate the new register flag
-       newAdd = true;
-       
-       //focus to ID field
-       txtIdUser.requestFocusInWindow();
+        //Enable buttons
+        btnFirst.setEnabled(false);
+        btnLast.setEnabled(false);
+        btnNext.setEnabled(false);
+        btnLatest.setEnabled(false);
+        btnEdit.setEnabled(false);
+        btnDeleteUser.setEnabled(false);
+        btnSearch.setEnabled(false);
+        btnSave.setEnabled(true);
+        btnCancel.setEnabled(true);
+
+        //Enable Fields
+        txtIdUser.setEnabled(true);
+        txtName.setEnabled(true);
+        txtLastName.setEnabled(true);
+        txtPassword.setEnabled(true);
+        txtConfirm.setEnabled(true);
+        cmbProfile.setEnabled(true);
+
+        //Clear Fields
+        txtIdUser.setText("");
+        txtName.setText("");
+        txtLastName.setText("");
+        txtPassword.setText("");
+        txtConfirm.setText("");
+        cmbProfile.setSelectedIndex(0);
+
+        //We activate the new register flag
+        newAdd = true;
+
+        //focus to ID field
+        txtIdUser.requestFocusInWindow();
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUserActionPerformed
-        // TODO add your handling code here:
+        int position = myData.userPosition(txtIdUser.getText());
+        int answer = JOptionPane.showConfirmDialog(rootPane, "Esta seguro de borrar el registro");
+        if(answer != 0){
+            return;
+        }
+        String msg;        
+        msg = myData.deleteUser(position);
+        JOptionPane.showMessageDialog(rootPane, msg);
+        userCurrent=0;
+        showRegister();
     }//GEN-LAST:event_btnDeleteUserActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-       //Enable Buttons
-       btnFirst.setEnabled(true);
-       btnLast.setEnabled(true);
-       btnNext.setEnabled(true);
-       btnLatest.setEnabled(true);
-       btnEdit.setEnabled(true);
-       btnDeleteUser.setEnabled(true);
-       btnSearch.setEnabled(true);
-       btnSave.setEnabled(false);
-       btnCancel.setEnabled(false);
-       
-       //Disable Fields
-       txtIdUser.setEnabled(false);
-       txtName.setEnabled(false);
-       txtLastName.setEnabled(false);
-       txtPassword.setEnabled(false);
-       txtConfirm.setEnabled(false);
-       cmbProfile.setEnabled(false);
+        //Enable Buttons
+        btnFirst.setEnabled(true);
+        btnLast.setEnabled(true);
+        btnNext.setEnabled(true);
+        btnLatest.setEnabled(true);
+        btnEdit.setEnabled(true);
+        btnDeleteUser.setEnabled(true);
+        btnSearch.setEnabled(true);
+        btnSave.setEnabled(false);
+        btnCancel.setEnabled(false);
+
+        //Disable Fields
+        txtIdUser.setEnabled(false);
+        txtName.setEnabled(false);
+        txtLastName.setEnabled(false);
+        txtPassword.setEnabled(false);
+        txtConfirm.setEnabled(false);
+        cmbProfile.setEnabled(false);
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
-       showRegister();
+        showRegister();
     }//GEN-LAST:event_formInternalFrameOpened
-    
-    private void showRegister(){
-       txtIdUser.setText(myData.getUsers()[userCurrent].getIdUser());
-       txtName.setText(myData.getUsers()[userCurrent].getName());
-       txtLastName.setText(myData.getUsers()[userCurrent].getLastName());
-       txtPassword.setText(myData.getUsers()[userCurrent].getPassword());
-       txtConfirm.setText(myData.getUsers()[userCurrent].getPassword());
-       cmbProfile.setSelectedIndex(myData.getUsers()[userCurrent].getProfile());
+
+    private void showRegister() {
+        txtIdUser.setText(myData.getUsers()[userCurrent].getIdUser());
+        txtName.setText(myData.getUsers()[userCurrent].getName());
+        txtLastName.setText(myData.getUsers()[userCurrent].getLastName());
+        txtPassword.setText(myData.getUsers()[userCurrent].getPassword());
+        txtConfirm.setText(myData.getUsers()[userCurrent].getPassword());
+        cmbProfile.setSelectedIndex(myData.getUsers()[userCurrent].getProfile());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
