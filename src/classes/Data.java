@@ -98,6 +98,41 @@ public class Data {
     public int numberProducts() {
         return productCounter;
     }
+    
+    public int productPosition(String product) {
+        for (int i = 0; i < userCounter; i++) {
+            if (myProducts[i].getIdProduct().equals(product)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public String addProduct(Product myProduct) {
+        if (productCounter == maxProducts) {
+            return "Se ha alcanzado el número máximo de productos";
+        }
+
+        myProducts[productCounter] = myProduct;
+        productCounter++;
+        return "Producto agregado correctamente";
+    }
+    
+    public String editProduct(Product myProduct, int position) {        
+        myProducts[position].setDescription(myProduct.getDescription());
+        myProducts[position].setPrice(myProduct.getPrice());
+        myProducts[position].setIva(myProduct.getIva());
+        myProducts[position].setNote(myProduct.getNote());
+        return "Producto modificado correctamente";
+    }
+
+    public String deleteProduct(int position) {
+        for (int i = position; i < productCounter - 1; i++) {
+            myProducts[i] = myProducts[i + 1];
+        }
+        productCounter--;
+        return "Producto elimiando correctamente";
+    }
 
   
 }

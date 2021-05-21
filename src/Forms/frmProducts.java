@@ -1,6 +1,7 @@
 package Forms;
 
 import classes.Data;
+import classes.Product;
 import classes.User;
 import classes.Utilidades;
 import javax.swing.JOptionPane;
@@ -433,16 +434,16 @@ public class frmProducts extends javax.swing.JInternalFrame {
             }
         }
 
-        //We create the user object and add it to data
-//        User myUser = new User(txtIdProducts.getText(), txtDescription.getText(), txtPrice.getText(), password, cmbProfile.getSelectedIndex());
-//        String msg;
-//        if (newAdd) {
-//            msg = myData.addUser(myUser);
-//        } else {
-//            msg = myData.editUser(myUser, position);
-//        }
+       //We create the product object and add it to data
+        Product myProduct = new Product(txtIdProducts.getText(), txtDescription.getText(), price,cmbIVA.getSelectedIndex(),txtNote.getText());
+        String msg;
+        if (newAdd) {
+            msg = myData.addProduct(myProduct);
+        } else {
+            msg = myData.editProduct(myProduct, position);
+        }
 
-//        JOptionPane.showMessageDialog(rootPane, msg);
+        JOptionPane.showMessageDialog(rootPane, msg);
 
         //Enable Buttons
         btnFirst.setEnabled(true);
