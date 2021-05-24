@@ -12,7 +12,7 @@ public class frmUsers extends javax.swing.JInternalFrame {
     private boolean newAdd = false;
     private DefaultTableModel myTable;
 
-    public void setDatos(Data myData) {
+    public void setData(Data myData) {
         this.myData = myData;
     }
 

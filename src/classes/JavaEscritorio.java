@@ -12,7 +12,7 @@ public class JavaEscritorio {
         
         //We call the login form
         frmLogin myLogin = new frmLogin();
-        myLogin.setDatos(myData);
+        myLogin.setData(myData);
         myLogin.setLocationRelativeTo(null);
         myLogin.setVisible(true);
     }

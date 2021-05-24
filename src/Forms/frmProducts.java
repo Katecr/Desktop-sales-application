@@ -2,7 +2,6 @@ package Forms;
 
 import classes.Data;
 import classes.Product;
-import classes.User;
 import classes.Utilidades;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,7 +13,7 @@ public class frmProducts extends javax.swing.JInternalFrame {
     private boolean newAdd = false;
     private DefaultTableModel myTable;
 
-    public void setDatos(Data myData) {
+    public void setData(Data myData) {
         this.myData = myData;
     }
 
@@ -47,7 +46,7 @@ public class frmProducts extends javax.swing.JInternalFrame {
         btnSave = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnNew = new javax.swing.JButton();
-        btnDeleteUser = new javax.swing.JButton();
+        btnDeleteProduct = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         txObligatory = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -55,7 +54,7 @@ public class frmProducts extends javax.swing.JInternalFrame {
         txtObligatory3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblTableUsers = new javax.swing.JTable();
+        tblTableProducts = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtNote = new javax.swing.JTextArea();
         cmbIVA = new javax.swing.JComboBox<>();
@@ -98,6 +97,8 @@ public class frmProducts extends javax.swing.JInternalFrame {
 
         jLabel3.setText("Precio:");
 
+        txtPrice.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        txtPrice.setToolTipText("");
         txtPrice.setEnabled(false);
 
         jLabel4.setText("Nota");
@@ -169,11 +170,11 @@ public class frmProducts extends javax.swing.JInternalFrame {
             }
         });
 
-        btnDeleteUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
-        btnDeleteUser.setToolTipText("Eliminar registro actual");
-        btnDeleteUser.addActionListener(new java.awt.event.ActionListener() {
+        btnDeleteProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete.png"))); // NOI18N
+        btnDeleteProduct.setToolTipText("Eliminar registro actual");
+        btnDeleteProduct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteUserActionPerformed(evt);
+                btnDeleteProductActionPerformed(evt);
             }
         });
 
@@ -201,7 +202,7 @@ public class frmProducts extends javax.swing.JInternalFrame {
         jLabel9.setForeground(new java.awt.Color(255, 51, 51));
         jLabel9.setText("*");
 
-        tblTableUsers.setModel(new javax.swing.table.DefaultTableModel(
+        tblTableProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -212,14 +213,15 @@ public class frmProducts extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblTableUsers);
+        jScrollPane1.setViewportView(tblTableProducts);
 
         txtNote.setColumns(20);
         txtNote.setRows(5);
         txtNote.setEnabled(false);
         jScrollPane2.setViewportView(txtNote);
 
-        cmbIVA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0%", "10%", "19%" }));
+        cmbIVA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un valor de IVA", "0%", "10%", "19%" }));
+        cmbIVA.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -227,62 +229,62 @@ public class frmProducts extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)))
-                            .addComponent(txObligatory))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtObligatory3)
-                                    .addComponent(txtObligatory2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(65, 65, 65)
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cmbIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 123, Short.MAX_VALUE))
-                                    .addComponent(txtDescription)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtIdProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane2)))
-                    .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLatest, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3)
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDeleteUser, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnLatest, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(111, 111, 111)
+                            .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(3, 3, 3)
+                            .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnDeleteProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(36, 36, 36)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                                .addComponent(txObligatory))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel7)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtIdProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtObligatory3)
+                                        .addComponent(txtObligatory2))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(65, 65, 65)
+                                            .addComponent(jLabel9)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(cmbIVA, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtDescription)))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,10 +326,10 @@ public class frmProducts extends javax.swing.JInternalFrame {
                     .addComponent(btnSearch)
                     .addComponent(btnSave)
                     .addComponent(btnEdit)
-                    .addComponent(btnDeleteUser)
+                    .addComponent(btnDeleteProduct)
                     .addComponent(btnCancel))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -339,7 +341,7 @@ public class frmProducts extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtDescriptionActionPerformed
 
     private void btnLatestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLatestActionPerformed
-        productCurrent = myData.numberUsers() - 1;
+        productCurrent = myData.numberProducts() - 1;
         showRegister();
     }//GEN-LAST:event_btnLatestActionPerformed
 
@@ -350,7 +352,7 @@ public class frmProducts extends javax.swing.JInternalFrame {
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         productCurrent++;
-        if (productCurrent == myData.numberUsers()) {
+        if (productCurrent == myData.numberProducts()) {
             productCurrent = 0;
         }
         showRegister();
@@ -359,19 +361,19 @@ public class frmProducts extends javax.swing.JInternalFrame {
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         productCurrent--;
         if (productCurrent == -1) {
-            productCurrent = myData.numberUsers() - 1;
+            productCurrent = myData.numberProducts() - 1;
         }
         showRegister();
     }//GEN-LAST:event_btnLastActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        String user = JOptionPane.showInputDialog("Ingrese código de usuario");
-        if(user.equals("")){
+        String product = JOptionPane.showInputDialog("Ingrese código del producto");
+        if(product.equals("")){
             return;
         }
-        int position = myData.userPosition(user);
+        int position = myData.productPosition(product);
         if(position == -1){
-            JOptionPane.showMessageDialog(rootPane, "Usuario no existe");
+            JOptionPane.showMessageDialog(rootPane, "Producto no existe");
             return;
         }
         productCurrent = position;
@@ -418,17 +420,17 @@ public class frmProducts extends javax.swing.JInternalFrame {
         }
 
         //If it is new, we validate that the user does not exist
-        int position = myData.userPosition(txtIdProducts.getText());
+        int position = myData.productPosition(txtIdProducts.getText());
 
         if (newAdd) {
             if (position != -1) {
-                JOptionPane.showInternalMessageDialog(rootPane, "Usuario ya existe");
+                JOptionPane.showInternalMessageDialog(rootPane, "Producto ya existe");
                 txtIdProducts.requestFocusInWindow();
                 return;
             }
         } else {
             if (position == -1) {
-                JOptionPane.showInternalMessageDialog(rootPane, "Usuario creado");
+                JOptionPane.showInternalMessageDialog(rootPane, "Producto creado");
                 txtIdProducts.requestFocusInWindow();
                 return;
             }
@@ -451,7 +453,7 @@ public class frmProducts extends javax.swing.JInternalFrame {
         btnNext.setEnabled(true);
         btnLatest.setEnabled(true);
         btnEdit.setEnabled(true);
-        btnDeleteUser.setEnabled(true);
+        btnDeleteProduct.setEnabled(true);
         btnSearch.setEnabled(true);
         btnSave.setEnabled(false);
         btnCancel.setEnabled(false);
@@ -475,7 +477,7 @@ public class frmProducts extends javax.swing.JInternalFrame {
         btnNext.setEnabled(false);
         btnLatest.setEnabled(false);
         btnEdit.setEnabled(false);
-        btnDeleteUser.setEnabled(false);
+        btnDeleteProduct.setEnabled(false);
         btnSearch.setEnabled(false);
         btnSave.setEnabled(true);
         btnCancel.setEnabled(true);
@@ -501,7 +503,7 @@ public class frmProducts extends javax.swing.JInternalFrame {
         btnNext.setEnabled(false);
         btnLatest.setEnabled(false);
         btnEdit.setEnabled(false);
-        btnDeleteUser.setEnabled(false);
+        btnDeleteProduct.setEnabled(false);
         btnSearch.setEnabled(false);
         btnSave.setEnabled(true);
         btnCancel.setEnabled(true);
@@ -527,21 +529,21 @@ public class frmProducts extends javax.swing.JInternalFrame {
         txtIdProducts.requestFocusInWindow();
     }//GEN-LAST:event_btnNewActionPerformed
 
-    private void btnDeleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteUserActionPerformed
-        int position = myData.userPosition(txtIdProducts.getText());
+    private void btnDeleteProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteProductActionPerformed
+        int position = myData.productPosition(txtIdProducts.getText());
         int answer = JOptionPane.showConfirmDialog(rootPane, "Esta seguro de borrar el registro");
         if (answer != 0) {
             return;
         }
         String msg;
-        msg = myData.deleteUser(position);
+        msg = myData.deleteProduct(position);
         JOptionPane.showMessageDialog(rootPane, msg);
         productCurrent = 0;
         showRegister();
 
         //Update table when changes are made
         fillTable();
-    }//GEN-LAST:event_btnDeleteUserActionPerformed
+    }//GEN-LAST:event_btnDeleteProductActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         //Enable Buttons
@@ -550,7 +552,7 @@ public class frmProducts extends javax.swing.JInternalFrame {
         btnNext.setEnabled(true);
         btnLatest.setEnabled(true);
         btnEdit.setEnabled(true);
-        btnDeleteUser.setEnabled(true);
+        btnDeleteProduct.setEnabled(true);
         btnSearch.setEnabled(true);
         btnSave.setEnabled(false);
         btnCancel.setEnabled(false);
@@ -569,37 +571,42 @@ public class frmProducts extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void showRegister() {
-        txtIdProducts.setText(myData.getUsers()[productCurrent].getIdUser());
-        txtDescription.setText(myData.getUsers()[productCurrent].getName());
-        txtPrice.setText(myData.getUsers()[productCurrent].getLastName());
+        txtIdProducts.setText(myData.getProducts()[productCurrent].getIdProduct());
+        txtDescription.setText(myData.getProducts()[productCurrent].getDescription());
+        txtPrice.setText("" + myData.getProducts()[productCurrent].getPrice());
+        txtNote.setText(myData.getProducts()[productCurrent].getNote());
+        cmbIVA.setSelectedIndex(myData.getProducts()[productCurrent].getIva());
         
     }
 
     private void fillTable() {
-        String titles[] = {"ID usuario", "Nombre", "Apellido", "Perfil"};
-        String register[] = new String[4];
+        String titles[] = {"ID producto", "Descripción", "Precio", "IVA", "Nota"};
+        String register[] = new String[5];
         myTable = new DefaultTableModel(null, titles);
-        for (int i = 0; i < myData.numberUsers(); i++) {
-            register[0] = myData.getUsers()[i].getIdUser();
-            register[1] = myData.getUsers()[i].getName();
-            register[2] = myData.getUsers()[i].getLastName();
-            register[3] = profile(myData.getUsers()[i].getProfile());
+        for (int i = 0; i < myData.numberProducts(); i++) {
+            register[0] = myData.getProducts()[i].getIdProduct();
+            register[1] = myData.getProducts()[i].getDescription();
+            register[2] = "" + myData.getProducts()[i].getPrice();
+            register[3] = iva(myData.getProducts()[i].getIva());
+            register[4] = myData.getProducts()[i].getNote();
             myTable.addRow(register);
         }
-        tblTableUsers.setModel(myTable);
+        tblTableProducts.setModel(myTable);
     }
 
-    private String profile(int idProfile) {
-        if (idProfile == 1) {
-            return "Administrador";
-        } else {
-            return "Empleado";
+    private String iva(int idIVA) {
+        switch(idIVA){
+            case 0: return "seleccione un valor";
+            case 1: return "0%";
+            case 2: return "10%";
+            case 3: return "19%";
+            default: return "No definido";
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnDeleteUser;
+    private javax.swing.JButton btnDeleteProduct;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnFirst;
     private javax.swing.JButton btnLast;
@@ -618,7 +625,7 @@ public class frmProducts extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblTableUsers;
+    private javax.swing.JTable tblTableProducts;
     private javax.swing.JLabel txObligatory;
     private javax.swing.JTextField txtDescription;
     private javax.swing.JTextField txtIdProducts;

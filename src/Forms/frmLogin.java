@@ -13,7 +13,7 @@ public class frmLogin extends javax.swing.JFrame {
     
     private Data myData;
     
-    public void setDatos(Data myData){
+    public void setData(Data myData){
         this.myData = myData;
     }
     
@@ -149,7 +149,7 @@ public class frmLogin extends javax.swing.JFrame {
         
         frmPrimary myPrimary = new frmPrimary();
         this.setVisible(false);
-        myPrimary.setDatos(myData);
+        myPrimary.setData(myData);
         myPrimary.setExtendedState(JFrame.MAXIMIZED_BOTH);
         myPrimary.setVisible(true);
     }//GEN-LAST:event_btnAcceptActionPerformed

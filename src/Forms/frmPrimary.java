@@ -6,7 +6,7 @@ public class frmPrimary extends javax.swing.JFrame {
 
     private Data myData;
     
-    public void setDatos(Data myData){
+    public void setData(Data myData){
         this.myData = myData;
     }
     
@@ -170,7 +170,7 @@ public class frmPrimary extends javax.swing.JFrame {
 
     private void mnuFileUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFileUsersActionPerformed
         frmUsers myUsers = new frmUsers();
-        myUsers.setDatos(myData);
+        myUsers.setData(myData);
         dpnDestok.add(myUsers);
         myUsers.show();
     }//GEN-LAST:event_mnuFileUsersActionPerformed
@@ -181,7 +181,7 @@ public class frmPrimary extends javax.swing.JFrame {
 
     private void mnuFileProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFileProductsActionPerformed
         frmProducts myProducts = new frmProducts();
-        myProducts.setDatos(myData);
+        myProducts.setData(myData);
         dpnDestok.add(myProducts);
         myProducts.show();
     }//GEN-LAST:event_mnuFileProductsActionPerformed

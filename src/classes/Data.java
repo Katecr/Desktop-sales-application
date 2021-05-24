@@ -100,7 +100,7 @@ public class Data {
     }
     
     public int productPosition(String product) {
-        for (int i = 0; i < userCounter; i++) {
+        for (int i = 0; i < productCounter; i++) {
             if (myProducts[i].getIdProduct().equals(product)) {
                 return i;
             }
