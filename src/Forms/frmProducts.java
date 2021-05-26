@@ -575,8 +575,7 @@ public class frmProducts extends javax.swing.JInternalFrame {
         txtDescription.setText(myData.getProducts()[productCurrent].getDescription());
         txtPrice.setText("" + myData.getProducts()[productCurrent].getPrice());
         txtNote.setText(myData.getProducts()[productCurrent].getNote());
-        cmbIVA.setSelectedIndex(myData.getProducts()[productCurrent].getIva());
-        
+        cmbIVA.setSelectedIndex(myData.getProducts()[productCurrent].getIva());        
     }
 
     private void fillTable() {

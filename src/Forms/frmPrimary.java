@@ -92,6 +92,7 @@ public class frmPrimary extends javax.swing.JFrame {
         mnuFile.add(mnuFileChangeUser);
         mnuFile.add(jSeparator2);
 
+        mnuFileExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         mnuFileExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/exit.png"))); // NOI18N
         mnuFileExit.setText("Salir");
         mnuFileExit.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +158,10 @@ public class frmPrimary extends javax.swing.JFrame {
 
     
     private void mnuFileClientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFileClientsActionPerformed
-        // TODO add your handling code here:
+        frmClients myClients = new frmClients();
+        myClients.setData(myData);
+        dpnDestok.add(myClients);
+        myClients.show();
     }//GEN-LAST:event_mnuFileClientsActionPerformed
 
     private void mnuHelpHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuHelpHelpActionPerformed

@@ -1,15 +1,22 @@
 package classes;
 
+import java.util.Date;
+
 public class Data {
 
     private int maxUser = 50;
     private int maxProducts = 100;
+    private int maxClients = 100;
     private User myUsers[] = new User[maxUser];
     private Product myProducts[] = new Product[maxProducts];
+    private Client myClients [] = new Client[maxClients];
     private int userCounter = 0;
     private int productCounter = 0;
+    private int clientCounter = 0;
 
     public Data() {
+        
+        //We create users
         User myUser;        
         myUser = new User("kate", "Kate", "Castaño Rueda", "123456", 1);
         myUsers[userCounter] = myUser;
@@ -22,9 +29,8 @@ public class Data {
         userCounter++;
         myUser = new User("lucho", "Luis", "Perez", "123", 2);
         
-        
-        Product myProduct;
-        
+        //We create products
+        Product myProduct;        
         myProduct = new Product("1", "Coca-Cola",1200, 0, "");
         myProducts[productCounter] = myProduct;
         productCounter++;
@@ -34,6 +40,21 @@ public class Data {
         myProduct = new Product("3", "Salchichon Zanu x 500gr",3500, 2, "Recomendado con pan");
         myProducts[productCounter] = myProduct;
         productCounter++;
+        
+        //We create clients
+        Client myClient;        
+        myClient = new Client("1", 1 ,"Juan Carlos","Torres Marin", "Calle luna calle sol","2335896",
+                1,Utilidades.stringToDate("1974/09/23"),Utilidades.stringToDate("2012/12/10") );
+        myClients[clientCounter] = myClient;
+        clientCounter++;
+        myClient = new Client("2", 1 ,"Ledys","Bedoya", "Avenida la felicidad","5225566",
+                10,Utilidades.stringToDate("1981/01/11"),Utilidades.stringToDate("2010/06/16") );
+        myClients[clientCounter] = myClient;
+        clientCounter++;
+        myClient = new Client("3", 1 ,"Rufino","Aristizabal", "Carrera los angeles","8563214",
+                2,Utilidades.stringToDate("1978/07/17"),Utilidades.stringToDate("2016/08/25") );
+        myClients[clientCounter] = myClient;
+        clientCounter++;
         
     }
     //user methods
@@ -133,6 +154,53 @@ public class Data {
         productCounter--;
         return "Producto elimiando correctamente";
     }
+    
+     //clients methods
+    public Client[] getClients() {
+        return myClients;
+    }
 
+    public int clientPosition(String client) {
+        for (int i = 0; i < clientCounter; i++) {
+            if (myClients[i].getIdClient().equals(client)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public String addClient(Client myClient) {
+        if (clientCounter == maxClients) {
+            return "Se ha alcanzado el número máximo de clientes";
+        }
+
+        myClients[clientCounter] = myClient;
+        clientCounter++;
+        return "Cliente agregado correctamente";
+    }
+
+    public int numberClients() {
+        return clientCounter;
+    }
+
+    public String editClient(Client myClient, int position) {
+        myClients[position].setIdDocument(myClient.getIdDocument());
+        myClients[position].setNames(myClient.getNames());
+        myClients[position].setLastNames(myClient.getLastNames());
+        myClients[position].setAddress(myClient.getAddress());
+        myClients[position].setPhone(myClient.getPhone());
+        myClients[position].setIdCity(myClient.getIdCity());
+        myClients[position].setDayOfBirth(myClient.getDayOfBirth());
+        myClients[position].setAdmissionDay(myClient.getAdmissionDay());
+        return "Cliente modificado correctamente";
+    }
+
+    public String deleteClient(int position) {
+        for (int i = position; i < clientCounter - 1; i++) {
+            myClients[i] = myClients[i + 1];
+        }
+        clientCounter--;
+        return "Cliente elimiando correctamente";
+    }
   
 }
