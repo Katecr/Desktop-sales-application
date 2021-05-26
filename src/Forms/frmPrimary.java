@@ -1,6 +1,11 @@
 package Forms;
 
 import classes.Data;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
+
 
 public class frmPrimary extends javax.swing.JFrame {
 
@@ -18,7 +23,13 @@ public class frmPrimary extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dpnDestok = new javax.swing.JDesktopPane();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/images/background-blue.jpg"));
+        Image image = icon.getImage();
+        dpnDestok = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuFile = new javax.swing.JMenu();
         mnuFileClients = new javax.swing.JMenuItem();
@@ -38,6 +49,11 @@ public class frmPrimary extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Facturación");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         dpnDestok.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -45,11 +61,11 @@ public class frmPrimary extends javax.swing.JFrame {
         dpnDestok.setLayout(dpnDestokLayout);
         dpnDestokLayout.setHorizontalGroup(
             dpnDestokLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 737, Short.MAX_VALUE)
+            .addGap(0, 550, Short.MAX_VALUE)
         );
         dpnDestokLayout.setVerticalGroup(
             dpnDestokLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 351, Short.MAX_VALUE)
+            .addGap(0, 293, Short.MAX_VALUE)
         );
 
         mnuFile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/File.png"))); // NOI18N
@@ -190,6 +206,10 @@ public class frmPrimary extends javax.swing.JFrame {
         myProducts.show();
     }//GEN-LAST:event_mnuFileProductsActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+      
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -244,4 +264,6 @@ public class frmPrimary extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuMovementsNewInvoice;
     private javax.swing.JMenuItem mnuMovementsReportInvoice;
     // End of variables declaration//GEN-END:variables
+
+    
 }
