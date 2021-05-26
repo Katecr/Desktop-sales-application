@@ -1,5 +1,7 @@
 package classes;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.Date;
 
 public class Data {
@@ -203,4 +205,38 @@ public class Data {
         return "Cliente elimiando correctamente";
     }
   
+    public void recordAll(){
+       recordUsers();
+       recordProducts();
+       recordeClients();
+    }
+    
+    public void  recordUsers(){
+        FileWriter archive = null;
+        PrintWriter  writeArchive = null;
+        try {
+            archive = new FileWriter("Data/user.txt");
+            writeArchive = new PrintWriter(archive);
+            for (int i = 0; i < userCounter; i++) {
+               writeArchive.println(myUsers[i].toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+              if(archive != null){
+                  archive.close();
+              }  
+            } catch (Exception ex) {
+              ex.printStackTrace();  
+            }
+        }
+    }
+    public void  recordProducts(){
+        
+    }
+    public void  recordeClients(){
+        
+    }
+    
 }

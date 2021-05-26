@@ -99,4 +99,17 @@ public class Client {
     public void setAdmissionDay(Date admissionDay) {
         this.admissionDay = admissionDay;
     }
+
+    @Override
+    public String toString() {
+        return idClient + "|"
+                +idDocument + "|"
+                +names + "|"
+                +lastNames + "|"
+                +address + "|"
+                +phone +"|"
+                +idCity + "|"
+                +dayOfBirth + "|"
+                +admissionDay + "|"; 
+    } 
 }

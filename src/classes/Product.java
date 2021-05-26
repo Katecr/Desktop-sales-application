@@ -55,5 +55,12 @@ public class Product {
         this.note = note;
     }
     
-    
+    @Override
+    public String toString() {
+        return idProduct + "|"+
+                description + "|"+
+                price + "|"+
+                iva + "|"+
+                note; 
+    } 
 }

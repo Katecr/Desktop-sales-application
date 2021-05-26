@@ -196,6 +196,7 @@ public class frmPrimary extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuFileUsersActionPerformed
 
     private void mnuFileExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFileExitActionPerformed
+        myData.recordAll();
         System.exit(0);
     }//GEN-LAST:event_mnuFileExitActionPerformed
 

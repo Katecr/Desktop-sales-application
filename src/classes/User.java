@@ -52,6 +52,12 @@ public class User {
         this.profile = profile;
     }
 
-   
-    
+    @Override
+    public String toString() {
+        return idUser + "|"+
+                name + "|"+
+                lastName + "|"+
+                password + "|"+
+                profile; 
+    } 
 }
