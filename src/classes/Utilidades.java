@@ -24,4 +24,9 @@ public class Utilidades {
         }
         return aux;
     }
+    
+    public static String formatDate(Date date){
+        SimpleDateFormat formatOfText = new SimpleDateFormat("yyyy/MM/dd");
+        return formatOfText.format(date);
+    }
 }

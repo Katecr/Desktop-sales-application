@@ -27,21 +27,8 @@ public class Data {
         //load products
         loadProducts();
         
-        //We create clients
-        Client myClient;        
-        myClient = new Client("1", 1 ,"Juan Carlos","Torres Marin", "Calle luna calle sol","2335896",
-                1,Utilidades.stringToDate("1974/09/23"),Utilidades.stringToDate("2012/12/10") );
-        myClients[clientCounter] = myClient;
-        clientCounter++;
-        myClient = new Client("2", 1 ,"Ledys","Bedoya", "Avenida la felicidad","5225566",
-                10,Utilidades.stringToDate("1981/01/11"),Utilidades.stringToDate("2010/06/16") );
-        myClients[clientCounter] = myClient;
-        clientCounter++;
-        myClient = new Client("3", 1 ,"Rufino","Aristizabal", "Carrera los angeles","8563214",
-                2,Utilidades.stringToDate("1978/07/17"),Utilidades.stringToDate("2016/08/25") );
-        myClients[clientCounter] = myClient;
-        clientCounter++;
-        
+        //load clients
+        loadClients();
     }
     //user methods
     public User[] getUsers() {
@@ -388,5 +375,96 @@ public class Data {
             }
         }
     }
-    
+    public void loadClients(){
+        File archive = null;
+        FileReader readFile = null;        
+        BufferedReader readBuffered = null;
+        
+        try {
+            archive = new File("Data/clients.txt");
+            readFile = new FileReader(archive);
+            readBuffered = new BufferedReader(readFile);
+            
+            int position;
+            String aux;
+            String line;
+            
+            //Var clients
+            String idClient,names, lastNames,address,phone;
+            int idDocument, idCity;
+            Date dayOfBirth,admissionDay;
+
+            //loop through flat file with divider "|"
+            while ((line = readBuffered.readLine()) != null) {  
+                
+                //we extract the client id
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                idClient = aux;
+                line = line.substring(position + 1);
+                
+                //we extract the client idDocument              
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                idDocument = Integer.parseInt(aux);
+                line = line.substring(position + 1);
+                
+                //we extract the client names
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                names = aux;
+                line = line.substring(position + 1);
+                
+                //we extract the client lastNames
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                lastNames = aux;
+                line = line.substring(position + 1);
+                
+                //we extract the client address
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                address = aux;
+                line = line.substring(position + 1);
+                
+                //we extract the client phone
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                phone = aux;
+                line = line.substring(position + 1);
+                
+                //we extract the client idCity
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                idCity = Integer.parseInt(aux);
+                line = line.substring(position + 1);
+                
+                //we extract the client dayOfBirth and admissionDay
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                dayOfBirth = Utilidades.stringToDate(aux);
+                line = line.substring(position + 1);
+                admissionDay=Utilidades.stringToDate(line);
+                
+
+                //We create clients
+                Client myClient;        
+                myClient = new Client(idClient,idDocument ,names,lastNames, address,phone,
+                        idCity,dayOfBirth,admissionDay);
+                myClients[clientCounter] = myClient;
+                clientCounter++;  
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally{
+            try {
+               if(readFile != null){
+                   readFile.close();
+               } 
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
 }
