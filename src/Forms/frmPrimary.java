@@ -1,6 +1,7 @@
 package Forms;
 
 import classes.Data;
+import classes.frmChangePassword;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -104,6 +105,11 @@ public class frmPrimary extends javax.swing.JFrame {
 
         mnuFileChangePass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/password.png"))); // NOI18N
         mnuFileChangePass.setText("Cambio clave");
+        mnuFileChangePass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuFileChangePassActionPerformed(evt);
+            }
+        });
         mnuFile.add(mnuFileChangePass);
 
         mnuFileChangeUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user-change.png"))); // NOI18N
@@ -232,6 +238,11 @@ public class frmPrimary extends javax.swing.JFrame {
         myLogin.setLocationRelativeTo(null); //center on the screen
         myLogin.setVisible(true);
     }//GEN-LAST:event_mnuFileChangeUserActionPerformed
+
+    private void mnuFileChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFileChangePassActionPerformed
+       frmChangePassword myChange = new frmChangePassword (this, rootPaneCheckingEnabled);
+       myChange.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_mnuFileChangePassActionPerformed
 
     /**
      * @param args the command line arguments
