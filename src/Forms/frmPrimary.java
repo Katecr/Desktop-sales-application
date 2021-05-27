@@ -108,6 +108,11 @@ public class frmPrimary extends javax.swing.JFrame {
 
         mnuFileChangeUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/user-change.png"))); // NOI18N
         mnuFileChangeUser.setText("Cambio Usuario");
+        mnuFileChangeUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuFileChangeUserActionPerformed(evt);
+            }
+        });
         mnuFile.add(mnuFileChangeUser);
         mnuFile.add(jSeparator2);
 
@@ -219,6 +224,14 @@ public class frmPrimary extends javax.swing.JFrame {
           mnuMovementsReportInvoice.setEnabled(false);
       }
     }//GEN-LAST:event_formWindowOpened
+
+    private void mnuFileChangeUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFileChangeUserActionPerformed
+        this.setVisible(false);
+        frmLogin myLogin = new frmLogin();
+        myLogin.setData(myData);
+        myLogin.setLocationRelativeTo(null); //center on the screen
+        myLogin.setVisible(true);
+    }//GEN-LAST:event_mnuFileChangeUserActionPerformed
 
     /**
      * @param args the command line arguments
