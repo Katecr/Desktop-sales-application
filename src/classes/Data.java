@@ -233,10 +233,46 @@ public class Data {
         }
     }
     public void  recordProducts(){
-        
+        FileWriter archive = null;
+        PrintWriter  writeArchive = null;
+        try {
+            archive = new FileWriter("Data/product.txt");
+            writeArchive = new PrintWriter(archive);
+            for (int i = 0; i < productCounter; i++) {
+               writeArchive.println(myProducts[i].toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+              if(archive != null){
+                  archive.close();
+              }  
+            } catch (Exception ex) {
+              ex.printStackTrace();  
+            }
+        }  
     }
     public void  recordeClients(){
-        
+       FileWriter archive = null;
+        PrintWriter  writeArchive = null;
+        try {
+            archive = new FileWriter("Data/client.txt");
+            writeArchive = new PrintWriter(archive);
+            for (int i = 0; i < clientCounter; i++) {
+               writeArchive.println(myClients[i].toString());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+              if(archive != null){
+                  archive.close();
+              }  
+            } catch (Exception ex) {
+              ex.printStackTrace();  
+            }
+        } 
     }
     
 }
