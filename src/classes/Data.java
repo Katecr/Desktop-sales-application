@@ -44,6 +44,15 @@ public class Data {
         }
         return false;
     }
+    
+    public int getProfile(String user) {
+        for (int i = 0; i < userCounter; i++) {
+            if (myUsers[i].getIdUser().equals(user)) {
+                return myUsers[i].getProfile();
+            }
+        }
+        return -1;
+    }
 
     public int userPosition(String user) {
         for (int i = 0; i < userCounter; i++) {

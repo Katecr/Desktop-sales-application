@@ -10,11 +10,14 @@ import javax.swing.ImageIcon;
 public class frmPrimary extends javax.swing.JFrame {
 
     private Data myData;
+    private int profile;
     
     public void setData(Data myData){
         this.myData = myData;
     }
-    
+    public void setProfile(int profile){
+        this.profile = profile;
+    }
     public frmPrimary() {
         initComponents();
     }
@@ -208,7 +211,13 @@ public class frmPrimary extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuFileProductsActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-      
+      //Set permissions
+      if(profile == 2){ //If you are an employee we remove permissions
+          mnuFileClients.setEnabled(false);
+          mnuFileProducts.setEnabled(false);
+          mnuFileUsers.setEnabled(false);
+          mnuMovementsReportInvoice.setEnabled(false);
+      }
     }//GEN-LAST:event_formWindowOpened
 
     /**

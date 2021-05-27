@@ -75,7 +75,7 @@ public class frmClients extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
-        setTitle("Usuarios");
+        setTitle("Clientes");
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
             }
@@ -425,6 +425,8 @@ public class frmClients extends javax.swing.JInternalFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        getAccessibleContext().setAccessibleName("Clientes");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
