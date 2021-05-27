@@ -1,3 +1,4 @@
 1|Coca-Cola|1200|0|
 2|Pan de leche|800|1|se venden mejor caliente
 3|Salchichon Zanu x 500gr|3500|2|Recomendado con pan
+4|Hit Mango|1800|1|De todos los sabores el mismo precio.

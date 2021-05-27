@@ -1,5 +1,8 @@
 package classes;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -18,30 +21,11 @@ public class Data {
 
     public Data() {
         
-        //We create users
-        User myUser;        
-        myUser = new User("kate", "Kate", "Castaño Rueda", "123456", 1);
-        myUsers[userCounter] = myUser;
-        userCounter++;
-        myUser = new User("pepe", "Pedro", "Infante", "123", 2);
-        myUsers[userCounter] = myUser;
-        userCounter++;
-        myUser = new User("maria", "Maria", "Taborda", "123", 2);
-        myUsers[userCounter] = myUser;
-        userCounter++;
-        myUser = new User("lucho", "Luis", "Perez", "123", 2);
+        //load users
+        loadUsers();
         
-        //We create products
-        Product myProduct;        
-        myProduct = new Product("1", "Coca-Cola",1200, 0, "");
-        myProducts[productCounter] = myProduct;
-        productCounter++;
-        myProduct = new Product("2", "Pan de leche",800, 1, "se venden mejor caliente");
-        myProducts[productCounter] = myProduct;
-        productCounter++;
-        myProduct = new Product("3", "Salchichon Zanu x 500gr",3500, 2, "Recomendado con pan");
-        myProducts[productCounter] = myProduct;
-        productCounter++;
+        //load products
+        loadProducts();
         
         //We create clients
         Client myClient;        
@@ -215,7 +199,7 @@ public class Data {
         FileWriter archive = null;
         PrintWriter  writeArchive = null;
         try {
-            archive = new FileWriter("Data/user.txt");
+            archive = new FileWriter("Data/users.txt");
             writeArchive = new PrintWriter(archive);
             for (int i = 0; i < userCounter; i++) {
                writeArchive.println(myUsers[i].toString());
@@ -236,7 +220,7 @@ public class Data {
         FileWriter archive = null;
         PrintWriter  writeArchive = null;
         try {
-            archive = new FileWriter("Data/product.txt");
+            archive = new FileWriter("Data/products.txt");
             writeArchive = new PrintWriter(archive);
             for (int i = 0; i < productCounter; i++) {
                writeArchive.println(myProducts[i].toString());
@@ -257,7 +241,7 @@ public class Data {
        FileWriter archive = null;
         PrintWriter  writeArchive = null;
         try {
-            archive = new FileWriter("Data/client.txt");
+            archive = new FileWriter("Data/clients.txt");
             writeArchive = new PrintWriter(archive);
             for (int i = 0; i < clientCounter; i++) {
                writeArchive.println(myClients[i].toString());
@@ -273,6 +257,136 @@ public class Data {
               ex.printStackTrace();  
             }
         } 
+    }
+    
+    public void loadUsers(){
+        File archive = null;
+        FileReader readFile = null;        
+        BufferedReader readBuffered = null;
+        
+        try {
+            archive = new File("Data/users.txt");
+            readFile = new FileReader(archive);
+            readBuffered = new BufferedReader(readFile);
+            
+            int position;
+            String aux;
+            String line;
+            
+            //Var user
+            String idUser, name, lastName, password;
+            int profile;
+            
+            while ((line = readBuffered.readLine()) != null) {  
+                
+                //we extract the user id
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                idUser = aux;
+                line = line.substring(position + 1);
+                
+                //we extract the user name                
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                name = aux;
+                line = line.substring(position + 1);
+                
+                //we extract the user lastname
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                lastName = aux;
+                line = line.substring(position + 1);
+                
+                //we extract the user password and profile             
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                password = aux;
+                line = line.substring(position + 1);
+                profile = Integer.parseInt(line);
+                
+                //We create users
+                User myUser;        
+                myUser = new User(idUser, name, lastName, password, profile);
+                myUsers[userCounter] = myUser;
+                userCounter++;
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally{
+            try {
+               if(readFile != null){
+                   readFile.close();
+               } 
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    public void loadProducts(){
+        File archive = null;
+        FileReader readFile = null;        
+        BufferedReader readBuffered = null;
+        
+        try {
+            archive = new File("Data/products.txt");
+            readFile = new FileReader(archive);
+            readBuffered = new BufferedReader(readFile);
+            
+            int position;
+            String aux;
+            String line;
+            
+            //Var products
+            String idProduct,description, note;
+            int price, iva;
+
+            //loop through flat file with divider "|"
+            while ((line = readBuffered.readLine()) != null) {  
+                
+                //we extract the product id
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                idProduct = aux;
+                line = line.substring(position + 1);
+                
+                //we extract the product description               
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                description = aux;
+                line = line.substring(position + 1);
+                
+                //we extract the product price
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                price = Integer.parseInt(aux);
+                line = line.substring(position + 1);
+                
+                //we extract the product iva
+                position = line.indexOf('|');
+                aux = line.substring(0, position);
+                iva = Integer.parseInt(aux);
+                line = line.substring(position + 1);
+                note = line;
+                
+                //We create products
+                Product myProduct;        
+                myProduct = new Product(idProduct, description,price, iva, note);
+                myProducts[productCounter] = myProduct;
+                productCounter++;   
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally{
+            try {
+               if(readFile != null){
+                   readFile.close();
+               } 
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
     
 }
