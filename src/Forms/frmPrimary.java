@@ -13,16 +13,24 @@ public class frmPrimary extends javax.swing.JFrame {
     private Data myData;
     private int profile;
     private String password;
+    private String userCurrent;
     
     public void setData(Data myData){
         this.myData = myData;
     }
+    
     public void setProfile(int profile){
         this.profile = profile;
     }
+        
     public void setPassword(String password){
         this.password = password;
     }
+    
+    public void setUserCurrent(String userCurrent){
+        this.userCurrent = userCurrent;
+    }
+    
     public frmPrimary() {
         initComponents();
     }
@@ -246,6 +254,8 @@ public class frmPrimary extends javax.swing.JFrame {
     private void mnuFileChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFileChangePassActionPerformed
        frmChangePassword myChange = new frmChangePassword (this, rootPaneCheckingEnabled);
        myChange.setPassword(password);
+       myChange.setUserCurrent(userCurrent);
+       myChange.setData(myData);
        myChange.setLocationRelativeTo(this);
        myChange.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_mnuFileChangePassActionPerformed

@@ -130,7 +130,7 @@ public class frmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        this.dispose();
+        System.exit(0);
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
@@ -152,6 +152,7 @@ public class frmLogin extends javax.swing.JFrame {
         myPrimary.setData(myData);
         myPrimary.setProfile(myData.getProfile(txtUser.getText()));
         myPrimary.setPassword(new String(txtPassword.getPassword()));
+        myPrimary.setUserCurrent(txtUser.getText());
         myPrimary.setExtendedState(JFrame.MAXIMIZED_BOTH);
         myPrimary.setVisible(true);
     }//GEN-LAST:event_btnAcceptActionPerformed

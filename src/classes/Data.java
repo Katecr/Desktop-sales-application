@@ -53,7 +53,16 @@ public class Data {
         }
         return -1;
     }
-
+    
+    public void getChangePassword(String user, String password) {
+        for (int i = 0; i < userCounter; i++) {
+            if (myUsers[i].getIdUser().equals(user)) {
+                myUsers[i].setPassword(password);
+                return;
+            }
+        }
+    }
+    
     public int userPosition(String user) {
         for (int i = 0; i < userCounter; i++) {
             if (myUsers[i].getIdUser().equals(user)) {

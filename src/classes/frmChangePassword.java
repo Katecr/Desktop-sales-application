@@ -2,14 +2,25 @@
 package classes;
 
 import javax.swing.JOptionPane;
+import classes.Data;
 
 public class frmChangePassword extends javax.swing.JDialog {
 
     private String password;
+    private String userCurrent;
+    private Data myData;
+
     
+    public void setData(Data myData){
+        this.myData = myData;
+    }
     
     public void setPassword(String password){
         this.password = password;
+    }
+    
+    public void setUserCurrent(String userCurrent){
+        this.userCurrent = userCurrent;
     }
     
     public frmChangePassword(java.awt.Frame parent, boolean modal) {
@@ -163,6 +174,10 @@ public class frmChangePassword extends javax.swing.JDialog {
             return;
         }
         
+        //Change password
+        myData.getChangePassword(userCurrent, newPassword);
+        JOptionPane.showMessageDialog(rootPane, "Contraseña modificada correctamente");
+        this.dispose();
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
