@@ -1,19 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package classes;
 
-/**
- *
- * @author diseno1
- */
+import javax.swing.JOptionPane;
+
 public class frmChangePassword extends javax.swing.JDialog {
 
-    /**
-     * Creates new form frmChangePassword
-     */
+    private String password;
+    
+    
+    public void setPassword(String password){
+        this.password = password;
+    }
+    
     public frmChangePassword(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -29,11 +27,11 @@ public class frmChangePassword extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtPasswordCurrent = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
-        jPasswordField2 = new javax.swing.JPasswordField();
+        txtNewPassword = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordField3 = new javax.swing.JPasswordField();
+        txtConfirmPassword = new javax.swing.JPasswordField();
         btnAccept = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -43,7 +41,19 @@ public class frmChangePassword extends javax.swing.JDialog {
 
         jLabel1.setText("Clave actual:");
 
+        txtPasswordCurrent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordCurrentActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Nueva clave:");
+
+        txtNewPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNewPasswordActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Confirmación:");
 
@@ -87,9 +97,9 @@ public class frmChangePassword extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancel)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtPasswordCurrent, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtNewPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -101,15 +111,15 @@ public class frmChangePassword extends javax.swing.JDialog {
                         .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPasswordCurrent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel)
@@ -121,13 +131,51 @@ public class frmChangePassword extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-
-      
+        String currentPassword = new String(txtPasswordCurrent.getPassword());
+        String newPassword = new String(txtNewPassword.getPassword());
+        String confirmPassword = new String(txtConfirmPassword.getPassword());
+        
+        if(currentPassword.equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Debes ingresar la contraseña actual");
+            txtPasswordCurrent.requestFocusInWindow();
+            return;
+        }
+        if(newPassword.equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Debes ingresar la nueva contraseña");
+            txtNewPassword.requestFocusInWindow();
+            return;
+        }
+        if(confirmPassword.equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Debes ingresar la confirmación de la contraseña");
+            txtConfirmPassword.requestFocusInWindow();
+            return;
+        }
+        
+        if(!currentPassword.equals(password)){
+            JOptionPane.showMessageDialog(rootPane, "La contraseña actual no corresponde a la contraseña del usuario ingresado");
+            txtPasswordCurrent.requestFocusInWindow();
+            return;
+        }
+        
+        if(!newPassword.equals(confirmPassword)){
+            JOptionPane.showMessageDialog(rootPane, "La contraseña nueva y la confirmación no corresponden");
+            txtNewPassword.requestFocusInWindow();
+            return;
+        }
+        
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void txtPasswordCurrentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordCurrentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordCurrentActionPerformed
+
+    private void txtNewPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNewPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNewPasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,8 +226,8 @@ public class frmChangePassword extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
+    private javax.swing.JPasswordField txtConfirmPassword;
+    private javax.swing.JPasswordField txtNewPassword;
+    private javax.swing.JPasswordField txtPasswordCurrent;
     // End of variables declaration//GEN-END:variables
 }

@@ -151,6 +151,7 @@ public class frmLogin extends javax.swing.JFrame {
         this.setVisible(false);
         myPrimary.setData(myData);
         myPrimary.setProfile(myData.getProfile(txtUser.getText()));
+        myPrimary.setPassword(new String(txtPassword.getPassword()));
         myPrimary.setExtendedState(JFrame.MAXIMIZED_BOTH);
         myPrimary.setVisible(true);
     }//GEN-LAST:event_btnAcceptActionPerformed
