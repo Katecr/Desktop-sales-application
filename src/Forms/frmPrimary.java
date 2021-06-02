@@ -211,7 +211,10 @@ public class frmPrimary extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuHelpHelpActionPerformed
 
     private void mnuHelpAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuHelpAboutActionPerformed
-        // TODO add your handling code here:
+        frmHelpAbout myAbout = new frmHelpAbout(this, rootPaneCheckingEnabled);
+        myAbout.setLocationRelativeTo(this);
+        myAbout.setVisible(rootPaneCheckingEnabled);
+        
     }//GEN-LAST:event_mnuHelpAboutActionPerformed
 
     private void mnuFileUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFileUsersActionPerformed

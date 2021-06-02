@@ -164,12 +164,15 @@ public class frmChangePassword extends javax.swing.JDialog {
         
         if(!currentPassword.equals(password)){
             JOptionPane.showMessageDialog(rootPane, "La contraseña actual no corresponde a la contraseña del usuario ingresado");
+            txtPasswordCurrent.setText("");
             txtPasswordCurrent.requestFocusInWindow();
             return;
         }
         
         if(!newPassword.equals(confirmPassword)){
             JOptionPane.showMessageDialog(rootPane, "La contraseña nueva y la confirmación no corresponden");
+            txtPasswordCurrent.setText("");
+            txtNewPassword.setText("");
             txtNewPassword.requestFocusInWindow();
             return;
         }
