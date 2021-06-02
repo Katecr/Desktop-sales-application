@@ -151,6 +151,11 @@ public class frmPrimary extends javax.swing.JFrame {
 
         mnuMovementsNewInvoice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/newInvoice.png"))); // NOI18N
         mnuMovementsNewInvoice.setText("Nueva Factura");
+        mnuMovementsNewInvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuMovementsNewInvoiceActionPerformed(evt);
+            }
+        });
         mnuMovements.add(mnuMovementsNewInvoice);
 
         mnuMovementsReportInvoice.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/reportInvoice.png"))); // NOI18N
@@ -262,6 +267,13 @@ public class frmPrimary extends javax.swing.JFrame {
        myChange.setLocationRelativeTo(this);
        myChange.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_mnuFileChangePassActionPerformed
+
+    private void mnuMovementsNewInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuMovementsNewInvoiceActionPerformed
+        frmInvoice myInvoice = new frmInvoice();
+        myInvoice.setData(myData);
+        dpnDestok.add(myInvoice);
+        myInvoice.show();
+    }//GEN-LAST:event_mnuMovementsNewInvoiceActionPerformed
 
     /**
      * @param args the command line arguments
