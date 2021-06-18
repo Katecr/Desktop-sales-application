@@ -109,7 +109,7 @@ public class Client {
                 +address + "|"
                 +phone +"|"
                 +idCity + "|"
-                + Utilidades.formatDate(dayOfBirth)+ "|"
-                +Utilidades.formatDate(admissionDay) + "|"; 
+                + Utilities.formatDate(dayOfBirth)+ "|"
+                +Utilities.formatDate(admissionDay) + "|"; 
     } 
 }

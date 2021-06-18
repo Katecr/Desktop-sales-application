@@ -3,9 +3,11 @@ package Forms;
 
 import classes.Data;
 import classes.Options;
-import classes.Utilidades;
+import classes.Utilities;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class frmInvoice extends javax.swing.JInternalFrame {
@@ -261,7 +263,7 @@ public class frmInvoice extends javax.swing.JInternalFrame {
         }
         
         // Date system
-        txtDate.setText(Utilidades.formatDate(new Date()));
+        txtDate.setText(Utilities.formatDate(new Date()));
         
         //We show totals in zeros
         txtTotalQuantity.setText("0");
@@ -288,7 +290,7 @@ public class frmInvoice extends javax.swing.JInternalFrame {
             return;
         }
         
-         if (!Utilidades.isNumeric(txtQuantity.getText())) {
+         if (!Utilities.isNumeric(txtQuantity.getText())) {
             JOptionPane.showInternalMessageDialog(rootPane, "Debe digitar un valor numerico.");
             txtQuantity.setText("");
             txtQuantity.requestFocusInWindow();            
@@ -320,6 +322,9 @@ public class frmInvoice extends javax.swing.JInternalFrame {
         cmbProduct.setSelectedIndex(0);
         txtQuantity.setText("");
         cmbProduct.requestFocusInWindow();
+        
+        //Update totals
+        updateTotals();
     }//GEN-LAST:event_btnAddActionPerformed
     
     private void fillTable() {
@@ -327,6 +332,24 @@ public class frmInvoice extends javax.swing.JInternalFrame {
         String register[] = new String[5];
         myTable = new DefaultTableModel(null, titles);
          tblDetail.setModel(myTable);
+         
+        //Align number fields to the right
+        DefaultTableCellRenderer tcr = new DefaultTableCellRenderer();
+        tcr.setHorizontalAlignment(SwingConstants.RIGHT);
+        tblDetail.getColumnModel().getColumn(2).setCellRenderer(tcr);
+        tblDetail.getColumnModel().getColumn(3).setCellRenderer(tcr);
+        tblDetail.getColumnModel().getColumn(4).setCellRenderer(tcr);
+    }
+    
+    private void updateTotals(){
+        int numberRows = tblDetail.getRowCount();
+        int sumQuantity = 0, sumValue =0;
+        for (int i = 0; i < numberRows; i++) {
+           sumQuantity += Utilities.objectToInt(tblDetail.getValueAt(i, 3));
+           sumValue += Utilities.objectToInt(tblDetail.getValueAt(i, 4));
+        }
+        txtTotalQuantity.setText("" + sumQuantity);
+        txtTotalValue.setText("" + sumValue);
     }
     
 

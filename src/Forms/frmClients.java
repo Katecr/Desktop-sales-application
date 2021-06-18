@@ -3,7 +3,7 @@ package Forms;
 import classes.Client;
 import classes.Data;
 import classes.Product;
-import classes.Utilidades;
+import classes.Utilities;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;

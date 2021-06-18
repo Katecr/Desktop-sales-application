@@ -2,7 +2,7 @@ package Forms;
 
 import classes.Data;
 import classes.Product;
-import classes.Utilidades;
+import classes.Utilities;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -399,7 +399,7 @@ public class frmProducts extends javax.swing.JInternalFrame {
             txtPrice.requestFocusInWindow();
             return;
         }
-        if (!Utilidades.isNumeric(txtPrice.getText())) {
+        if (!Utilities.isNumeric(txtPrice.getText())) {
             JOptionPane.showInternalMessageDialog(rootPane, "Debe digitar un valor numerico.");
             txtPrice.requestFocusInWindow();
             return;

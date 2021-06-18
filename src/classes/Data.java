@@ -460,9 +460,9 @@ public class Data {
                 //we extract the client dayOfBirth and admissionDay
                 position = line.indexOf('|');
                 aux = line.substring(0, position);
-                dayOfBirth = Utilidades.stringToDate(aux);
+                dayOfBirth = Utilities.stringToDate(aux);
                 line = line.substring(position + 1);
-                admissionDay=Utilidades.stringToDate(line);
+                admissionDay=Utilities.stringToDate(line);
                 
 
                 //We create clients
