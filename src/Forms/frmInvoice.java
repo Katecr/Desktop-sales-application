@@ -5,10 +5,13 @@ import classes.Data;
 import classes.Options;
 import classes.Utilidades;
 import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class frmInvoice extends javax.swing.JInternalFrame {
 
      private Data myData;
+     private DefaultTableModel myTable;
     
     public void setData(Data myData){
         this.myData = myData;
@@ -103,6 +106,11 @@ public class frmInvoice extends javax.swing.JInternalFrame {
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-file.png"))); // NOI18N
         btnAdd.setToolTipText("Adiciona producto a la factura");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
 
         btnDeleteAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/trash.png"))); // NOI18N
         btnDeleteAll.setToolTipText("Eliminar la factura");
@@ -258,12 +266,69 @@ public class frmInvoice extends javax.swing.JInternalFrame {
         //We show totals in zeros
         txtTotalQuantity.setText("0");
         txtTotalValue.setText("0");
+        
+        //Format the table
+        fillTable();
     }//GEN-LAST:event_formInternalFrameOpened
 
     private void txtTotalQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalQuantityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTotalQuantityActionPerformed
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        //Validate info
+        if(cmbProduct.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(rootPane,"Debe seleccionar un producto");
+            cmbProduct.requestFocusInWindow();
+            return;
+        }
+        if(txtQuantity.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane,"Debe digitar una cantidad");
+            txtQuantity.requestFocusInWindow();
+            return;
+        }
+        
+         if (!Utilidades.isNumeric(txtQuantity.getText())) {
+            JOptionPane.showInternalMessageDialog(rootPane, "Debe digitar un valor numerico.");
+            txtQuantity.setText("");
+            txtQuantity.requestFocusInWindow();            
+            return;
+        } 
+        
+        int quantity = Integer.parseInt(txtQuantity.getText());
+        
+        if (quantity <= 0) {
+            JOptionPane.showInternalMessageDialog(rootPane, "Debe digitar un valor mayor a 0.");
+            txtQuantity.setText("");
+            txtQuantity.requestFocusInWindow();
+            return;
+        } 
+        
+        //Casting in Java, we search for the data of the selected product
+        int position = myData.productPosition(((Options)cmbProduct.getSelectedItem()).getId());
+        
+        //We add product to the table
+        String register[] = new String[5];
+        register[0] = myData.getProducts()[position].getIdProduct();
+        register[1] = myData.getProducts()[position].getDescription();
+        register[2] = "" + myData.getProducts()[position].getPrice();
+        register[3] = "" + quantity;
+        register[4] = "" + (quantity * myData.getProducts()[position].getPrice());
+        myTable.addRow(register);
+        
+        //Initialize fields
+        cmbProduct.setSelectedIndex(0);
+        txtQuantity.setText("");
+        cmbProduct.requestFocusInWindow();
+    }//GEN-LAST:event_btnAddActionPerformed
+    
+    private void fillTable() {
+        String titles[] = {"ID Producto","Descripción", "Precio","Cantidad", "Valor"};
+        String register[] = new String[5];
+        myTable = new DefaultTableModel(null, titles);
+         tblDetail.setModel(myTable);
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
