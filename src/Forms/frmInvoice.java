@@ -3,6 +3,8 @@ package Forms;
 
 import classes.Data;
 import classes.Options;
+import classes.Utilidades;
+import java.util.Date;
 
 public class frmInvoice extends javax.swing.JInternalFrame {
 
@@ -126,8 +128,15 @@ public class frmInvoice extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Totales:");
 
+        txtTotalQuantity.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTotalQuantity.setEnabled(false);
+        txtTotalQuantity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalQuantityActionPerformed(evt);
+            }
+        });
 
+        txtTotalValue.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         txtTotalValue.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -223,23 +232,37 @@ public class frmInvoice extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        
+        //Note: in combo boxes, the parameter type must be changed from String to Object. In code
         // We load customer
         Options opt = new Options("NA", "Seleccione un cliente...");
         cmbClient.addItem(opt);
         for (int i = 0; i < myData.numberClients(); i++) {
-            opt = new Options(myData.getClients()[i].getIdClient(),myData.getClients()[i].getNames() + " " + myData.getClients()[i].getLastNames());
-            cmbClient.addItem(opt);
+            opt = new Options(myData.getClients()[i].getIdClient(),
+                              myData.getClients()[i].getNames() + " " + myData.getClients()[i].getLastNames());
+           cmbClient.addItem(opt);
         }
         
         // We load products
         opt = new Options("NA", "Seleccione un producto...");
+        cmbProduct.addItem(opt);
         for (int i = 0; i < myData.numberProducts(); i++) {
-            opt = new Options(myData.getProducts()[i].getIdProduct(),myData.getProducts()[i].getDescription());
+            opt = new Options(myData.getProducts()[i].getIdProduct(),
+                              myData.getProducts()[i].getDescription());
             cmbProduct.addItem(opt);
         }
         
+        // Date system
+        txtDate.setText(Utilidades.formatDate(new Date()));
         
+        //We show totals in zeros
+        txtTotalQuantity.setText("0");
+        txtTotalValue.setText("0");
     }//GEN-LAST:event_formInternalFrameOpened
+
+    private void txtTotalQuantityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalQuantityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalQuantityActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -249,8 +272,8 @@ public class frmInvoice extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearchClient;
     private javax.swing.JButton btnSearchProduct;
-    private javax.swing.JComboBox<String> cmbClient;
-    private javax.swing.JComboBox<String> cmbProduct;
+    private javax.swing.JComboBox<Object> cmbClient;
+    private javax.swing.JComboBox<Object> cmbProduct;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
