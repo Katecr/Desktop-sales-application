@@ -18,6 +18,7 @@ public class Data {
     private int userCounter = 0;
     private int productCounter = 0;
     private int clientCounter = 0;
+    private int numInvoice = 0;
 
     public Data() {
         
@@ -29,6 +30,9 @@ public class Data {
         
         //load clients
         loadClients();
+        
+        //load configuration
+        loadConfig();
     }
     //user methods
     public User[] getUsers() {
@@ -197,7 +201,8 @@ public class Data {
     public void recordAll(){
        recordUsers();
        recordProducts();
-       recordeClients();
+       recordClients();
+       recordConfig();
     }
     
     public void  recordUsers(){
@@ -242,7 +247,7 @@ public class Data {
             }
         }  
     }
-    public void  recordeClients(){
+    public void  recordClients(){
        FileWriter archive = null;
         PrintWriter  writeArchive = null;
         try {
@@ -262,6 +267,29 @@ public class Data {
               ex.printStackTrace();  
             }
         } 
+    }
+    
+    public void  recordConfig(){
+        FileWriter archive = null;
+        PrintWriter  writeArchive = null;
+        try {
+            archive = new FileWriter("Data/config.ini");
+            writeArchive = new PrintWriter(archive);
+            
+            writeArchive.println("[General]");
+            writeArchive.println("InvoiceCurrent=" + numInvoice);
+          
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+              if(archive != null){
+                  archive.close();
+              }  
+            } catch (Exception ex) {
+              ex.printStackTrace();  
+            }
+        }
     }
     
     public void loadUsers(){
@@ -484,5 +512,37 @@ public class Data {
             }
         }
     }
-
+    
+    public void loadConfig(){
+        File archive = null;
+        FileReader readFile = null;        
+        BufferedReader readBuffered = null;
+        
+        try {
+            archive = new File("Data/config.ini");
+            readFile = new FileReader(archive);
+            readBuffered = new BufferedReader(readFile);
+            
+            String line;
+            
+            //Traverse the line in width and assign a value after the line in this case 14
+            while ((line = readBuffered.readLine()) != null) {  
+                if(line.startsWith("InvoiceCurrent=")){
+                    numInvoice = Integer.parseInt(line.substring(14));
+                } 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally{
+            try {
+               if(readFile != null){
+                   readFile.close();
+               } 
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    
 }
